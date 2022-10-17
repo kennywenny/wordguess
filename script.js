@@ -11,7 +11,7 @@ const candidateWords = [
 const guessedWordElement = document.querySelector('#guessed_word')
 const feedbackElement = document.querySelector('#feedback')
 
-const randomWord = 'fixed'
+const randomWord = 'bookkeeper'
 //candidateWords[Math.floor(Math.random() * candidateWords.length)]
 let guessedWord = '-'.repeat(randomWord.length)
 guessedWordElement.textContent = guessedWord
@@ -19,11 +19,21 @@ guessedWordElement.textContent = guessedWord
 document.addEventListener('keydown', event => {
   const keyPressed = event.key
   feedbackElement.textContent = `You have pressed ${keyPressed}.`
-  const indexOfLetter = randomWord.indexOf(keyPressed)
-  if (indexOfLetter === -1) {
-    feedbackElement.textContent = feedbackElement.textContent + ' That was wrong, numbnuts.'
-    return
+  let currentIndex = 0
+  let foundLetter = false
+  while (true) {
+    const indexOfLetter = randomWord.indexOf(keyPressed, currentIndex)
+    console.log(indexOfLetter)
+    if (indexOfLetter === -1) {
+      if (!foundLetter) {
+        feedbackElement.textContent = feedbackElement.textContent + ' That was wrong, numbnuts.'
+      }
+      return
+    }
+    guessedWord = guessedWord.substring(0, indexOfLetter) + randomWord[indexOfLetter] + guessedWord.substring(indexOfLetter + 1)
+    console.log(guessedWord)
+    currentIndex = indexOfLetter+1
+    foundLetter = true
   }
-  guessedWord = guessedWord.substring(0, indexOfLetter) + randomWord[indexOfLetter] + guessedWord.substring(indexOfLetter + 1)
   guessedWordElement.textContent = guessedWord
 })
