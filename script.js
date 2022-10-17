@@ -25,4 +25,5 @@ document.addEventListener('keydown', event => {
     return
   }
   guessedWord = guessedWord.substring(0, indexOfLetter) + randomWord[indexOfLetter] + guessedWord.substring(indexOfLetter + 1)
+  guessedWordElement.textContent = guessedWord
 })
