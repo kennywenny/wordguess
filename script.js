@@ -7,6 +7,7 @@ const candidateWords = [
   'who',
   'rhythm'
 ]
+const validGuesses = 'abcdefghijklmnopqrstuvwxyz'
 
 const guessedWordElement = document.querySelector('#guessed_word')
 const feedbackElement = document.querySelector('#feedback')
@@ -18,6 +19,9 @@ guessedWordElement.textContent = guessedWord
 
 document.addEventListener('keydown', event => {
   const keyPressed = event.key
+  if (!validGuesses.includes(keyPressed)) {
+    return
+  }
   feedbackElement.textContent = `You have pressed ${keyPressed}.`
   let currentIndex = 0
   let foundLetter = false
