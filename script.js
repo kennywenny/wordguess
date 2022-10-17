@@ -16,8 +16,8 @@ const lossesElement = document.querySelector('#losses')
 
 const winsKey = 'wins'
 const lossesKey = 'losses'
-const wins = localStorage.getItem(winsKey) || 0
-const losses = localStorage.getItem(lossesKey) || 0
+let wins = localStorage.getItem(winsKey) || 0
+let losses = localStorage.getItem(lossesKey) || 0
 renderWinLosses()
 
 const randomWord = 'bookkeeper'
@@ -68,8 +68,11 @@ function validateGuessedWord() {
 }
 
 function loseGame() {
-  console.log('You are a loser')
   clearInterval(timer)
+  losses++
+  localStorage.setItem(lossesKey, losses)
+  // TODO: Big LOSER message
+  renderWinLosses()
 }
 
 function renderWinLosses() {
