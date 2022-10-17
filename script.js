@@ -71,9 +71,6 @@ document.addEventListener('keydown', event => {
     }
     const guessedWordLettersArray = guessedWord.split('')
     for (let i = 0; i < randomWord.length; i++) {
-      if (guessedWordLettersArray[i] !== '-') {
-        continue
-      }
       if (randomWord[i] == keyPressed) {
         guessedWordLettersArray[i] = keyPressed
       }
