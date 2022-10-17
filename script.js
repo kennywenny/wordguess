@@ -15,6 +15,7 @@ const winsElement = document.querySelector('#wins')
 const lossesElement = document.querySelector('#losses')
 const gameResultElement = document.querySelector('#game_result')
 const startButtonElement = document.querySelector('#start')
+const timerElement = document.querySelector('#timer')
 
 const winsKey = 'wins'
 const lossesKey = 'losses'
@@ -34,13 +35,16 @@ startButtonElement.addEventListener('click', () => {
   //candidateWords[Math.floor(Math.random() * candidateWords.length)] // TODO: Reinstate me
   guessedWord = '-'.repeat(randomWord.length)
   guessedWordElement.textContent = guessedWord
+  clearElements()
+  renderWinLosses()
   countdown = 5
+  timerElement.textContent = countdown
   timer = setInterval(() => {
     countdown--
+    timerElement.textContent = countdown
     if (countdown <= 0) {
       loseGame()
     }
-    console.log(countdown)
   }, 1000)
 })
 
@@ -101,4 +105,10 @@ function loseGame() {
 function renderWinLosses() {
   winsElement.textContent = wins
   lossesElement.textContent = losses
+}
+
+function clearElements() {
+  guessedWordElement.textContent = ''
+  feedbackElement.textContent = ''
+  gameResultElement.textContent = ''
 }
