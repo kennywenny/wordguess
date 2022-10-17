@@ -9,6 +9,8 @@ const candidateWords = [
 ]
 
 const randomWord = candidateWords[Math.floor(Math.random() * candidateWords.length)]
-const guessedWord = '-'.repeat(randomWord.length)
-console.log(randomWord)
-console.log(guessedWord)
+let guessedWord = '-'.repeat(randomWord.length)
+
+document.addEventListener('keydown', event => {
+  console.log(event)
+})
