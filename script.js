@@ -14,6 +14,7 @@ const feedbackElement = document.querySelector('#feedback')
 const winsElement = document.querySelector('#wins')
 const lossesElement = document.querySelector('#losses')
 const gameResultElement = document.querySelector('#game_result')
+const startButtonElement = document.querySelector('#start')
 
 const winsKey = 'wins'
 const lossesKey = 'losses'
@@ -21,22 +22,33 @@ let wins = localStorage.getItem(winsKey) || 0
 let losses = localStorage.getItem(lossesKey) || 0
 renderWinLosses()
 
-const randomWord = 'bookkeeper'
-//candidateWords[Math.floor(Math.random() * candidateWords.length)] // TODO: Reinstate me
-let guessedWord = '-'.repeat(randomWord.length)
-guessedWordElement.textContent = guessedWord
+let randomWord
+let guessedWord
+let countdown
+let timer
+let gameOn = false
 
-let countdown = 5
+startButtonElement.addEventListener('click', () => {
+  gameOn = true
+  randomWord = 'bookkeeper'
+  //candidateWords[Math.floor(Math.random() * candidateWords.length)] // TODO: Reinstate me
+  guessedWord = '-'.repeat(randomWord.length)
+  guessedWordElement.textContent = guessedWord
+  countdown = 5
+  timer = setInterval(() => {
+    countdown--
+    if (countdown <= 0) {
+      loseGame()
+    }
+    console.log(countdown)
+  }, 1000)
+})
 
-const timer = setInterval(() => {
-  countdown--
-  if (countdown <= 0) {
-    loseGame()
-  }
-  console.log(countdown)
-}, 1000)
 
 document.addEventListener('keydown', event => {
+  if (!gameOn) {
+    return
+  }
   const keyPressed = event.key
   if (!validGuesses.includes(keyPressed)) {
     return
@@ -57,7 +69,7 @@ document.addEventListener('keydown', event => {
     }
     guessedWord = guessedWord.substring(0, indexOfLetter) + randomWord[indexOfLetter] + guessedWord.substring(indexOfLetter + 1)
     console.log(guessedWord)
-    currentIndex = indexOfLetter+1
+    currentIndex = indexOfLetter + 1
     foundLetter = true
   }
 })
@@ -69,6 +81,7 @@ function validateGuessedWord() {
 }
 
 function winGame() {
+  gameOn = false
   clearInterval(timer)
   wins++
   localStorage.setItem(winsKey, wins)
@@ -77,6 +90,7 @@ function winGame() {
 }
 
 function loseGame() {
+  gameOn = false
   clearInterval(timer)
   losses++
   localStorage.setItem(lossesKey, losses)
