@@ -28,6 +28,7 @@ document.addEventListener('keydown', event => {
       if (!foundLetter) {
         feedbackElement.textContent = feedbackElement.textContent + ' That was wrong, numbnuts.'
       }
+      guessedWordElement.textContent = guessedWord
       return
     }
     guessedWord = guessedWord.substring(0, indexOfLetter) + randomWord[indexOfLetter] + guessedWord.substring(indexOfLetter + 1)
@@ -35,5 +36,4 @@ document.addEventListener('keydown', event => {
     currentIndex = indexOfLetter+1
     foundLetter = true
   }
-  guessedWordElement.textContent = guessedWord
 })
