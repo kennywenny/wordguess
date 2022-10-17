@@ -33,6 +33,7 @@ document.addEventListener('keydown', event => {
         feedbackElement.textContent = feedbackElement.textContent + ' That was wrong, numbnuts.'
       }
       guessedWordElement.textContent = guessedWord
+      validateGuessedWord()
       return
     }
     guessedWord = guessedWord.substring(0, indexOfLetter) + randomWord[indexOfLetter] + guessedWord.substring(indexOfLetter + 1)
@@ -41,3 +42,7 @@ document.addEventListener('keydown', event => {
     foundLetter = true
   }
 })
+
+function validateGuessedWord() {
+  console.log('VALIDATE TODO')
+}
