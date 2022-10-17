@@ -13,6 +13,7 @@ const guessedWordElement = document.querySelector('#guessed_word')
 const feedbackElement = document.querySelector('#feedback')
 const winsElement = document.querySelector('#wins')
 const lossesElement = document.querySelector('#losses')
+const gameResultElement = document.querySelector('#game_result')
 
 const winsKey = 'wins'
 const lossesKey = 'losses'
@@ -71,7 +72,7 @@ function winGame() {
   clearInterval(timer)
   wins++
   localStorage.setItem(winsKey, wins)
-  // TODO: Big WINNER message
+  gameResultElement.textContent = 'YOU WON'
   renderWinLosses()
 }
 
@@ -79,7 +80,7 @@ function loseGame() {
   clearInterval(timer)
   losses++
   localStorage.setItem(lossesKey, losses)
-  // TODO: Big LOSER message
+  gameResultElement.textContent = 'YOU LOST'
   renderWinLosses()
 }
 
