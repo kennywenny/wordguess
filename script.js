@@ -63,8 +63,16 @@ document.addEventListener('keydown', event => {
 
 function validateGuessedWord() {
   if (guessedWord === randomWord) {
-    console.log('DONE') // TODO
+    winGame()
   }
+}
+
+function winGame() {
+  clearInterval(timer)
+  wins++
+  localStorage.setItem(winsKey, wins)
+  // TODO: Big WINNER message
+  renderWinLosses()
 }
 
 function loseGame() {
