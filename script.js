@@ -17,6 +17,16 @@ const randomWord = 'bookkeeper'
 let guessedWord = '-'.repeat(randomWord.length)
 guessedWordElement.textContent = guessedWord
 
+let countdown = 5
+
+const timer = setInterval(() => {
+  countdown--
+  if (countdown <= 0) {
+    loseGame()
+  }
+  console.log(countdown)
+}, 1000)
+
 document.addEventListener('keydown', event => {
   const keyPressed = event.key
   if (!validGuesses.includes(keyPressed)) {
@@ -45,6 +55,11 @@ document.addEventListener('keydown', event => {
 
 function validateGuessedWord() {
   if (guessedWord === randomWord) {
-    console.log('DONE')
+    console.log('DONE') // TODO
   }
+}
+
+function loseGame() {
+  console.log('You are a loser')
+  clearInterval(timer)
 }
