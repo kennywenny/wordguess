@@ -69,7 +69,16 @@ document.addEventListener('keydown', event => {
       validateGuessedWord()
       return
     }
-    guessedWord = guessedWord.substring(0, indexOfLetter) + randomWord[indexOfLetter] + guessedWord.substring(indexOfLetter + 1)
+    const guessedWordLettersArray = guessedWord.split('')
+    for (let i = 0; i < randomWord.length; i++) {
+      if (guessedWordLettersArray[i] !== '-') {
+        continue
+      }
+      if (randomWord[i] == keyPressed) {
+        guessedWordLettersArray[i] = keyPressed
+      }
+    }
+    guessedWord = guessedWordLettersArray.join('')
     currentIndex = indexOfLetter + 1
     foundLetter = true
   }
