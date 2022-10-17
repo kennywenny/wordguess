@@ -44,5 +44,7 @@ document.addEventListener('keydown', event => {
 })
 
 function validateGuessedWord() {
-  console.log('VALIDATE TODO')
+  if (guessedWord === randomWord) {
+    console.log('DONE')
+  }
 }
