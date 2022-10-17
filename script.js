@@ -11,9 +11,17 @@ const validGuesses = 'abcdefghijklmnopqrstuvwxyz'
 
 const guessedWordElement = document.querySelector('#guessed_word')
 const feedbackElement = document.querySelector('#feedback')
+const winsElement = document.querySelector('#wins')
+const lossesElement = document.querySelector('#losses')
+
+const winsKey = 'wins'
+const lossesKey = 'losses'
+const wins = localStorage.getItem(winsKey) || 0
+const losses = localStorage.getItem(lossesKey) || 0
+renderWinLosses()
 
 const randomWord = 'bookkeeper'
-//candidateWords[Math.floor(Math.random() * candidateWords.length)]
+//candidateWords[Math.floor(Math.random() * candidateWords.length)] // TODO: Reinstate me
 let guessedWord = '-'.repeat(randomWord.length)
 guessedWordElement.textContent = guessedWord
 
@@ -62,4 +70,9 @@ function validateGuessedWord() {
 function loseGame() {
   console.log('You are a loser')
   clearInterval(timer)
+}
+
+function renderWinLosses() {
+  winsElement.textContent = wins
+  lossesElement.textContent = losses
 }
