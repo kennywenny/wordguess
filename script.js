@@ -31,13 +31,12 @@ let gameOn = false
 
 startButtonElement.addEventListener('click', () => {
   gameOn = true
-  randomWord = 'bookkeeper'
-  //candidateWords[Math.floor(Math.random() * candidateWords.length)] // TODO: Reinstate me
+  randomWord = candidateWords[Math.floor(Math.random() * candidateWords.length)]
   guessedWord = '-'.repeat(randomWord.length)
-  guessedWordElement.textContent = guessedWord
   clearElements()
+  guessedWordElement.textContent = guessedWord
   renderWinLosses()
-  countdown = 5
+  countdown = 20 
   timerElement.textContent = countdown
   timer = setInterval(() => {
     countdown--
@@ -62,7 +61,6 @@ document.addEventListener('keydown', event => {
   let foundLetter = false
   while (true) {
     const indexOfLetter = randomWord.indexOf(keyPressed, currentIndex)
-    console.log(indexOfLetter)
     if (indexOfLetter === -1) {
       if (!foundLetter) {
         feedbackElement.textContent = feedbackElement.textContent + ' That was wrong, numbnuts.'
@@ -72,7 +70,6 @@ document.addEventListener('keydown', event => {
       return
     }
     guessedWord = guessedWord.substring(0, indexOfLetter) + randomWord[indexOfLetter] + guessedWord.substring(indexOfLetter + 1)
-    console.log(guessedWord)
     currentIndex = indexOfLetter + 1
     foundLetter = true
   }
